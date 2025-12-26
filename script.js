@@ -13,6 +13,10 @@ let gameTimer = null;
 let popTimeout = null;
 let audioCtx = null;
 
+// base speed (will reduce as score increases)
+let baseMin = 600;
+let baseMax = 1400;
+
 /* ---------- Board Setup ---------- */
 function createBoard(size = 9) {
   board.innerHTML = "";
@@ -55,7 +59,13 @@ function randomHole() {
 function peep() {
   if (timeUp) return;
 
-  const time = randTime(600, 1400);
+  // 🔥 SPEED UP BASED ON SCORE
+  const speedFactor = Math.floor(score / 5) * 120;
+
+  const minTime = Math.max(200, baseMin - speedFactor);
+  const maxTime = Math.max(400, baseMax - speedFactor);
+
+  const time = randTime(minTime, maxTime);
   const hole = randomHole();
   const mole = hole.querySelector(".mole");
 
@@ -176,9 +186,9 @@ resetBtn.disabled = true;
 startBtn.addEventListener("click", () => startGame(30));
 resetBtn.addEventListener("click", resetGame);
 
+// optional keyboard shortcuts
 document.addEventListener("keydown", (e) => {
-  if (e.key === "1") startGame(40);
-  if (e.key === "2") startGame(30);
-  if (e.key === "3") startGame(20);
+  if (e.key === "1") startGame(40); // easy
+  if (e.key === "2") startGame(30); // normal
+  if (e.key === "3") startGame(20); // hard
 });
-
