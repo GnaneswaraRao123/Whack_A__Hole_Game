@@ -55,7 +55,7 @@ function randomHole() {
 function peep() {
   if (timeUp) return;
 
-  const time = randTime(800, 1500);
+  const time = randTime(600, 1400);
   const hole = randomHole();
   const mole = hole.querySelector(".mole");
 
