@@ -55,7 +55,7 @@ function randomHole() {
 function peep() {
   if (timeUp) return;
 
-  const time = randTime(600, 1400);
+  const time = randTime(800, 1500);
   const hole = randomHole();
   const mole = hole.querySelector(".mole");
 
@@ -181,3 +181,4 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "2") startGame(30);
   if (e.key === "3") startGame(20);
 });
+
